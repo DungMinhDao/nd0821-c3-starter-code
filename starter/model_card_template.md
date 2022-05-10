@@ -4,7 +4,7 @@ For additional information see the Model Card paper: https://arxiv.org/pdf/1810.
 
 ## Model Details
 
-This is the detail about the model
+This is the detail about the model. Will update later
 
 ## Intended Use
 
