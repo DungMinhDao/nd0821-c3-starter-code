@@ -6,7 +6,7 @@ import pickle
 from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
 from ml.data import process_data
-from ml.model import train_model
+from ml.model import train_model, inference, compute_model_metrics
 
 # Add code to load in the data.
 file_dir = os.path.dirname(__file__)
@@ -37,3 +37,19 @@ pickle.dump(rf_model, open(model_path, 'wb'))
 
 encoder_path = os.path.join(file_dir, '../model/encoder.pkl')
 pickle.dump(encoder, open(encoder_path, 'wb'))
+
+# Evaluation
+X_test, y_test, encoder, lb = process_data(
+    test,
+    categorical_features=cat_features,
+    label="salary",
+    training=False,
+    encoder=encoder,
+    lb=lb
+)
+
+preds = inference(rf_model, X_test)
+
+print('precision: {}, recall: {}, fbeta: {}'.format(
+    *compute_model_metrics(y_test, preds)
+))
