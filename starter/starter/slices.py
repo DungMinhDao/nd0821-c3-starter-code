@@ -1,9 +1,5 @@
-import os
 import sys
-
-file_dir = os.path.dirname(__file__)
-sys.path.insert(0, file_dir)
-
+import os
 import pickle
 import pandas as pd
 from ml.data import process_data
@@ -27,22 +23,26 @@ def slice_metrics(model, data, slice_feature, categorical_features=[]):
     -------
     None
     """
-    print("Performance on slices of data based on", slice_feature)
-    print("*****************************************************")
-    X, y, _, _ = process_data(
-        data, categorical_features=categorical_features, label="salary", training=True
-    )
-    preds = inference(model, X)
+    original_stdout = sys.stdout
+    with open(os.path.join(os.path.dirname(__file__), "slice_output.txt"), "w") as f:
+        sys.stdout = f
+        print("Performance on slices of data based on", slice_feature)
+        print("*****************************************************")
+        X, y, _, _ = process_data(
+            data, categorical_features=categorical_features, label="salary", training=True
+        )
+        preds = inference(model, X)
 
-    for slice_value in data[slice_feature].unique():
-        slice_index = data.index[data[slice_feature] == slice_value]
-        
-        print(slice_feature, '=', slice_value)
-        print('data size:', len(slice_index))
-        print('precision: {}, recall: {}, fbeta: {}'.format(
-            *compute_model_metrics(y[slice_index], preds[slice_index])
-        ))
-        print('-------------------------------------------------')
+        for slice_value in data[slice_feature].unique():
+            slice_index = data.index[data[slice_feature] == slice_value]
+            
+            print(slice_feature, '=', slice_value)
+            print('data size:', len(slice_index))
+            print('precision: {}, recall: {}, fbeta: {}'.format(
+                *compute_model_metrics(y[slice_index], preds[slice_index])
+            ))
+            print('-------------------------------------------------')
+        sys.stdout = original_stdout
 
 
 if __name__ == '__main__':

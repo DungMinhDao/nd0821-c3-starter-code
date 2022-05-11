@@ -25,9 +25,9 @@ The original dataset is first preprocessed and then split into training and eval
 ## Metrics
 _Please include the metrics used and your model's performance on those metrics._
 3 metrics were used for evaluating the model's performance: precision, recall, and fbeta. The model achieves the following result:
-* precision: 0.9516556291390729
-* recall: 0.935546875
-* fbeta: 0.9435325016414969
+* precision: 0.7482889733840304
+* recall: 0.6227848101265823
+* fbeta: 0.6797927461139895
 
 ## Ethical Considerations
 The misuse of these census information can cause consequences to the lives of people surveyed and (possibly) other people in some related populations

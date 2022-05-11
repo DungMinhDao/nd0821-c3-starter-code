@@ -38,6 +38,9 @@ pickle.dump(rf_model, open(model_path, 'wb'))
 encoder_path = os.path.join(file_dir, '../model/encoder.pkl')
 pickle.dump(encoder, open(encoder_path, 'wb'))
 
+lb_path = os.path.join(file_dir, '../model/lb.pkl')
+pickle.dump(lb, open(lb_path, 'wb'))
+
 # Evaluation
 X_test, y_test, encoder, lb = process_data(
     test,

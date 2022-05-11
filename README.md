@@ -1,3 +1,16 @@
+# NOTE ON RUNNING THE COMMANDS
+```bash
+# Run .py files from the project directory
+python starter/sanitycheck.py
+python starter/starter/train_model.py
+python starter/starter/slices.py
+# But start the uvicorn from starter directory
+cd starter
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+---
+
 Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.
 
 # Environment Set up
