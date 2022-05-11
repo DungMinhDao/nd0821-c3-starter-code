@@ -1,3 +1,4 @@
 /config.local
-/tmp
+/tmp/*
+!/tmp/gdrive-user-credentials.json
 /cache
