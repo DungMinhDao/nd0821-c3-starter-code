@@ -1,11 +1,16 @@
 # Script to train machine learning model.
 
+import os
+import pandas as pd
+import pickle
 from sklearn.model_selection import train_test_split
-
 # Add the necessary imports for the starter code.
-data = None
+from ml.data import process_data
+from ml.model import train_model
+
 # Add code to load in the data.
-process_data = None
+file_dir = os.path.dirname(__file__)
+data = pd.read_csv(os.path.join(file_dir, '../data/clean_data.csv'))
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
 
@@ -19,10 +24,16 @@ cat_features = [
     "sex",
     "native-country",
 ]
+# Process the test data with the process_data function.
 X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
-# Proces the test data with the process_data function.
-
 # Train and save a model.
+rf_model = train_model(X_train, y_train)
+
+model_path = os.path.join(file_dir, '../model/rf_model.pkl')
+pickle.dump(rf_model, open(model_path, 'wb'))
+
+encoder_path = os.path.join(file_dir, '../model/encoder.pkl')
+pickle.dump(encoder, open(encoder_path, 'wb'))
